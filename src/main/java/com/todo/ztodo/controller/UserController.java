@@ -24,7 +24,6 @@ public class UserController {
         UserEntity user = new UserEntity();
         user.setName(name);
         user.setEmail(email);
-        System.out.println(user);
         return userService.saveUser(user);
     }
 

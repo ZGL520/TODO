@@ -13,9 +13,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public List<UserEntity> getAllUsers() {
-        List<UserEntity> users = userRepository.findAll();
-        System.out.println("Fetched users: " + users);
-        return users;
+        return userRepository.findAll();
     }
 
     public UserEntity saveUser(UserEntity user) {
@@ -24,7 +22,6 @@ public class UserService {
 
     public List<UserEntity> getUserByEmail(String email) {
         List<UserEntity> user = userRepository.findByEmail(email);
-        System.out.println("Fetched user: " + user);
         return  userRepository.findByEmail(email);
     }
 
@@ -35,9 +32,7 @@ public class UserService {
     public Long deleteUser(String email) {
         List<UserEntity> user = userRepository.findByEmail(email);
         Long id = (long) -1;
-        if(user.isEmpty()) {
-            System.out.println("User not found");
-        }else {
+        if(!user.isEmpty()) {
             id = user.get(0).getId();
             userRepository.deleteById(id);
         }
