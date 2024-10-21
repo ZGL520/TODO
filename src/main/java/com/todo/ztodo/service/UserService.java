@@ -1,6 +1,7 @@
 package com.todo.ztodo.service;
 import com.todo.ztodo.entity.UserEntity;
 import com.todo.ztodo.repository.UserRepository;
+import com.todo.ztodo.utils.CommonException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,10 @@ public class UserService {
     }
 
     public UserEntity saveUser(UserEntity user) {
+        List<UserEntity> users = userRepository.findByEmail(user.getEmail());
+        if(!users.isEmpty()) {
+            throw new CommonException("User already exists");
+        }
         return userRepository.save(user);
     }
 
